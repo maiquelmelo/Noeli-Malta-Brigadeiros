@@ -1,0 +1,31 @@
+name: Gerar pacote da versão
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter projeto
+        uses: actions/checkout@v4
+
+      - name: Remover arquivos internos do GitHub
+        run: |
+          rm -rf .git .github docs
+
+      - name: Gerar arquivo ZIP
+        run: zip -r Noeli-Malta-App-${GITHUB_REF_NAME}.zip .
+
+      - name: Disponibilizar pacote
+        uses: actions/upload-artifact@v4
+        with:
+          name: Noeli-Malta-App-${{ github.ref_name }}
+          path: Noeli-Malta-App-${{ github.ref_name }}.zip
+          retention-days: 30
