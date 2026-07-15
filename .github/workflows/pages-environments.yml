@@ -1,0 +1,58 @@
+name: Publicar ambientes no GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - homologacao
+      - desenvolvimento
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Obter versão de produção
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: dist
+
+      - name: Obter versão de homologação
+        uses: actions/checkout@v4
+        with:
+          ref: homologacao
+          path: dist/homologacao
+
+      - name: Obter versão de desenvolvimento
+        uses: actions/checkout@v4
+        with:
+          ref: desenvolvimento
+          path: dist/desenvolvimento
+
+      - name: Remover metadados do Git
+        run: find dist -type d -name .git -prune -exec rm -rf {} +
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Preparar artefato
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v4
