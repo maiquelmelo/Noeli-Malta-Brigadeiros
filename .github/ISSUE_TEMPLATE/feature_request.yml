@@ -1,0 +1,35 @@
+name: Sugerir melhoria
+description: Proponha uma nova função ou ajuste
+title: "[MELHORIA] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Qual necessidade deve ser resolvida?
+      description: Explique o problema da rotina atual.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Como deveria funcionar?
+      description: Descreva o comportamento esperado.
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioridade sugerida
+      options:
+        - Baixa
+        - Média
+        - Alta
+        - Urgente
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Observações ou exemplos
