@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#d92f6f">
+<link rel="manifest" href="manifest.json">
+<title>Noeli Malta Brigadeiros e bem casados</title>
+<style>
+:root{
+  --pink:#d92f6f;--pink-dark:#b7205b;--pink-soft:#fde8f0;
+  --orange:#f57c28;--purple:#8f5bd1;--green:#5cb85c;--blue:#4a9bd8;
+  --yellow:#e7aa2d;--bg:#fff8fa;--card:#fff;--text:#28252a;--muted:#777078;
+  --line:#eee1e6;--shadow:0 10px 28px rgba(99,44,66,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#fff8fa,#fff);color:var(--text)}
+body{padding-bottom:76px}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app-shell{max-width:520px;margin:0 auto;min-height:100vh;background:rgba(255,255,255,.72)}
+.screen{display:none;min-height:calc(100vh - 76px)}.screen.active{display:block}
+.top-header{position:sticky;top:0;z-index:20;background:#fff;padding:12px 16px;border-bottom:1px solid var(--line)}
+.brand-row{display:flex;align-items:center;gap:10px}
+.brand-logo{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #f6ccd9}
+.brand-text{flex:1;text-align:center;margin-left:-24px}
+.brand-title{font-family:cursive;font-size:27px;font-weight:700;color:var(--pink-dark);line-height:1}
+.brand-sub{font-size:13px;color:var(--pink);margin-top:4px}
+.icon-btn{width:42px;height:42px;border:0;border-radius:50%;background:#fff0f5;color:var(--pink);font-size:22px;position:relative}
+.badge-count{position:absolute;right:-2px;top:-2px;background:var(--pink);color:#fff;border-radius:999px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:2px solid #fff}
+.content{padding:14px}
+.hero-note{background:linear-gradient(135deg,#fff0f5,#fff9fb);border:1px solid #f5cbd8;border-radius:18px;padding:14px;display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+.hero-note .bell{font-size:28px}.hero-note strong{color:var(--pink-dark)}
+.tile-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{border:0;border-radius:18px;padding:20px 12px;min-height:122px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:var(--shadow);color:#222}
+.tile-icon{font-size:40px;margin-bottom:8px}.tile-title{font-size:16px;font-weight:700}.tile-sub{font-size:11px;color:#655e64;margin-top:4px}
+.tile.pink{background:linear-gradient(135deg,#ffd8e6,#fff0f5)}.tile.orange{background:linear-gradient(135deg,#ffe3d2,#fff4ea)}
+.tile.purple{background:linear-gradient(135deg,#eadcf8,#f7f0ff)}.tile.green{background:linear-gradient(135deg,#dff2d5,#f2faed)}
+.tile.blue{background:linear-gradient(135deg,#d8eefb,#eef8fe)}.tile.yellow{background:linear-gradient(135deg,#ffe9bf,#fff7df)}
+.section-card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin-top:14px;overflow:hidden}
+.section-title{font-size:16px;font-weight:700;padding:13px 14px;border-bottom:1px solid var(--line)}
+.summary-row{display:flex;align-items:center;gap:10px;padding:13px 14px;border-bottom:1px solid var(--line)}
+.summary-row:last-child{border-bottom:0}.summary-icon{width:30px;text-align:center;font-size:20px}.summary-main{flex:1}.summary-label{font-size:14px}.summary-value{font-size:13px;color:var(--pink);font-weight:700}
+.arrow{color:#999;font-size:22px}
+.page-header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--pink),var(--pink-dark));color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+.page-header h2{font-size:17px;margin:0}.back-btn,.page-action{border:0;background:transparent;color:#fff;font-size:24px;width:36px;height:36px}
+.notification-card{background:#fff0f5;border:1px solid #f5cbd8;border-radius:16px;padding:15px;display:flex;gap:12px;margin-bottom:16px}
+.date-group{font-size:14px;color:#5d555c;margin:18px 2px 8px}
+.list-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:9px;box-shadow:0 5px 14px rgba(90,40,60,.06);display:flex;align-items:center;gap:10px}
+.list-icon{font-size:24px;color:var(--pink)}.list-body{flex:1}.list-title{font-weight:700;font-size:14px}.list-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.status{display:inline-block;border-radius:7px;padding:4px 7px;font-size:10px;font-weight:700}.status.ok{background:#dff3dc;color:#2b7429}.status.pending{background:#fff0cc;color:#95610c}.status.cancel{background:#fbdcdc;color:#9b3030}
+.calendar-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow)}
+.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.cal-title{font-size:17px;font-weight:700;text-transform:capitalize}.cal-btn{border:0;background:#fff;color:#333;font-size:22px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}.weekday{text-align:center;font-size:11px;color:#666;padding:6px 0}.day{min-height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;font-size:12px}.day.other{color:#bbb}.day.has{font-weight:700}.day.selected{background:var(--pink);color:#fff}.dot{position:absolute;bottom:5px;width:5px;height:5px;border-radius:50%;background:#f6a623}.day.selected .dot{background:#fff}
+.detail-tabs{display:flex;border-bottom:1px solid var(--line);margin-top:12px}.tab{flex:1;border:0;background:#fff;padding:10px 4px;font-size:12px}.tab.active{color:var(--pink);border-bottom:2px solid var(--pink)}
+.detail-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:12px}
+.detail-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #f2e8ec}.detail-row:last-child{border-bottom:0}.detail-row span:first-child{color:#555}.detail-row strong{color:#222;text-align:right}.detail-row .pink{color:var(--pink)}
+.form-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+label{display:block;font-size:12px;font-weight:700;margin:9px 0 5px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #e7d8de;border-radius:10px;background:#fff;font-size:14px}
+textarea{min-height:70px;resize:vertical}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.flavors{display:grid;grid-template-columns:1fr 1fr;gap:7px;max-height:180px;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:8px}.flavor{display:flex;align-items:center;gap:6px;background:#fff8fa;border-radius:8px;padding:7px;font-size:12px}.flavor input{width:auto}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn{border:0;border-radius:10px;padding:11px 14px;font-weight:700}.btn-primary{background:var(--pink);color:#fff}.btn-outline{background:#fff;color:var(--pink);border:1px solid var(--pink)}.btn-light{background:#f5eef1;color:#555}.btn-danger{background:#c53d4d;color:#fff}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:#666;background:#fff9fb}
+.more-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.more-row{display:flex;align-items:center;gap:11px;padding:14px;border-bottom:1px solid var(--line)}.more-row:last-child{border-bottom:0}.more-row button{border:0;background:transparent;flex:1;text-align:left}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:30;padding-bottom:env(safe-area-inset-bottom)}
+.nav-btn{border:0;background:#fff;color:#777;padding:8px 4px;font-size:10px}.nav-btn span{display:block;font-size:21px;margin-bottom:3px}.nav-btn.active{color:var(--pink)}
+.modal{display:none;position:fixed;inset:0;background:rgba(35,20,26,.55);z-index:99;padding:14px;overflow:auto}.modal.open{display:flex;align-items:center;justify-content:center}.modal-card{background:#fff;width:min(480px,100%);max-height:90vh;overflow:auto;border-radius:18px;padding:16px}
+.install-box{display:none;background:#fff1f6;border:1px solid #f5c4d5;border-radius:14px;padding:10px;margin:12px}
+#printArea{display:none}
+@media(max-width:480px){.g2,.g3{grid-template-columns:1fr}.brand-title{font-size:24px}.tile{min-height:112px}.flavors{grid-template-columns:1fr}}
+@media print{body{background:#fff;padding:0}.app-shell,.bottom-nav,.modal{display:none!important}#printArea{display:block!important;padding:20px}.ptable{width:100%;border-collapse:collapse}.ptable th,.ptable td{border:1px solid #ccc;padding:8px}.signs{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:60px;text-align:center}.sign{border-top:1px solid #333;padding-top:8px}}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<div id="installBox" class="install-box">
+  <strong>Instalar aplicativo</strong><br>
+  <span style="font-size:12px">Adicione o sistema à tela inicial para usar como app.</span>
+  <button id="installBtn" class="btn btn-primary" style="margin-top:8px">Instalar</button>
+</div>
+
+<section id="home" class="screen active">
+  <header class="top-header">
+    <div class="brand-row">
+      <img src="logo.png" class="brand-logo" alt="Logo Noeli Malta">
+      <div class="brand-text">
+        <div class="brand-title">Noeli Malta</div>
+        <div class="brand-sub">Brigadeiros e bem casados</div>
+      </div>
+      <button class="icon-btn" onclick="openScreen('notifications')">🔔<span id="notifBadge" class="badge-count">0</span></button>
+    </div>
+  </header>
+  <div class="content">
+    <div class="hero-note">
+      <div class="bell">🔔</div>
+      <div><strong>Notificações diárias</strong><div style="font-size:12px;color:#655e64;margin-top:4px">Pedidos pendentes serão lembrados todos os dias até a véspera da entrega.</div></div>
+    </div>
+    <div class="tile-grid">
+      <button class="tile pink" onclick="newOrder()"><div class="tile-icon">➕</div><div class="tile-title">Novo Pedido</div><div class="tile-sub">Criar novo pedido</div></button>
+      <button class="tile orange" onclick="openScreen('orders')"><div class="tile-icon">📋</div><div class="tile-title">Pedidos</div><div class="tile-sub">Ver todos os pedidos</div></button>
+      <button class="tile purple" onclick="openScreen('contracts')"><div class="tile-icon">📄</div><div class="tile-title">Contratos</div><div class="tile-sub">Contratos gerados</div></button>
+      <button class="tile green" onclick="openScreen('agenda')"><div class="tile-icon">📅</div><div class="tile-title">Agenda</div><div class="tile-sub">Calendário de entregas</div></button>
+      <button class="tile blue" onclick="openScreen('clients')"><div class="tile-icon">👥</div><div class="tile-title">Clientes</div><div class="tile-sub">Meus clientes</div></button>
+      <button class="tile yellow" onclick="openScreen('menu')"><div class="tile-icon">🧁</div><div class="tile-title">Cardápio</div><div class="tile-sub">Produtos e preços</div></button>
+    </div>
+    <div class="section-card">
+      <div class="section-title">Resumo do dia</div>
+      <div class="summary-row" onclick="openScreen('notifications')"><div class="summary-icon">🔔</div><div class="summary-main"><div class="summary-label">Pedidos pendentes</div></div><div id="sumPending" class="summary-value">0</div><div class="arrow">›</div></div>
+      <div class="summary-row" onclick="openScreen('agenda')"><div class="summary-icon">📅</div><div class="summary-main"><div class="summary-label">Entregas de hoje</div></div><div id="sumToday" class="summary-value">0</div><div class="arrow">›</div></div>
+      <div class="summary-row" onclick="openScreen('finance')"><div class="summary-icon">💲</div><div class="summary-main"><div class="summary-label">A receber</div></div><div id="sumReceive" class="summary-value">R$ 0,00</div><div class="arrow">›</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="notifications" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Notificações</h2><button class="page-action" onclick="requestNotifications()">⚙</button></div>
+  <div class="content">
+    <div class="notification-card"><div style="font-size:28px">🔔</div><div><strong style="color:var(--pink-dark)">Pedidos pendentes</strong><div style="font-size:12px;margin-top:5px">As notificações serão exibidas diariamente até o dia anterior da entrega, enquanto o aplicativo estiver instalado e for aberto regularmente.</div></div></div>
+    <div id="notificationList"></div>
+  </div>
+</section>
+
+<section id="orders" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Pedidos</h2><button class="page-action" onclick="newOrder()">＋</button></div>
+  <div class="content"><input id="orderSearch" placeholder="Pesquisar pedido..." oninput="renderOrders()"><div id="ordersList" style="margin-top:12px"></div></div>
+</section>
+
+<section id="contracts" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Contratos</h2><span></span></div>
+  <div class="content"><div id="contractsList"></div></div>
+</section>
+
+<section id="agenda" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Agenda</h2><span></span></div>
+  <div class="content">
+    <div class="calendar-card">
+      <div class="cal-head"><button class="cal-btn" onclick="changeMonth(-1)">‹</button><div id="calTitle" class="cal-title"></div><button class="cal-btn" onclick="changeMonth(1)">›</button></div>
+      <div id="calendar" class="cal-grid"></div>
+    </div>
+    <div id="selectedDayOrders" style="margin-top:14px"></div>
+  </div>
+</section>
+
+<section id="clients" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Clientes</h2><span></span></div>
+  <div class="content"><div id="clientsList"></div></div>
+</section>
+
+<section id="menu" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Cardápio</h2><button class="page-action" onclick="openMenuEditor()">＋</button></div>
+  <div class="content"><div class="btn-row"><button class="btn btn-light" onclick="resetCatalog()">Restaurar cardápio</button></div><div id="menuList"></div></div>
+</section>
+
+<section id="finance" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Financeiro</h2><span></span></div>
+  <div class="content"><div id="financeContent"></div></div>
+</section>
+
+<section id="newOrder" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Novo pedido</h2><span></span></div>
+  <div class="content">
+    <div class="form-card">
+      <h3>Cliente</h3>
+      <div class="g2"><div><label>Nome</label><input id="clientName"></div><div><label>WhatsApp</label><input id="clientPhone"></div></div>
+      <div class="g2"><div><label>CPF</label><input id="clientCpf"></div><div><label>Endereço</label><input id="clientAddress"></div></div>
+      <div class="g3"><div><label>Evento</label><input id="eventType"></div><div><label>Data do evento</label><input id="eventDate" type="date"></div><div><label>Data da entrega</label><input id="deliveryDate" type="date"></div></div>
+    </div>
+    <div class="form-card">
+      <h3>Produtos</h3>
+      <div class="g2"><div><label>Categoria</label><select id="productCategory" onchange="loadProducts()"></select></div><div><label>Produto</label><select id="productSelect" onchange="selectProduct()"></select></div></div>
+      <label>Sabores</label><div id="flavorList" class="flavors"></div>
+      <div class="g3"><div><label>Quantidade</label><input id="productQty" type="number" value="100" min="1" oninput="calcPreview()"></div><div><label>Cálculo</label><select id="calcType" onchange="calcPreview()"><option value="auto">Automático</option><option value="unit">Por unidade</option><option value="fraction">Preço do cento</option><option value="closed">Cento fechado</option><option value="manual">Manual</option></select></div><div><label>Preço base</label><input id="basePrice" type="number" step="0.01" oninput="calcPreview()"></div></div>
+      <label>Detalhes</label><textarea id="itemDetails"></textarea>
+      <div class="detail-box"><div class="detail-row"><span>Subtotal</span><strong id="itemPreview" class="pink">R$ 0,00</strong></div><div id="calcDescription" style="font-size:11px;color:var(--muted)"></div></div>
+      <div class="btn-row"><button class="btn btn-primary" onclick="addItem()">Adicionar item</button></div>
+    </div>
+    <div class="form-card">
+      <h3>Resumo do pedido</h3>
+      <table><thead><tr><th>Item</th><th>Qtd.</th><th>Total</th><th></th></tr></thead><tbody id="itemsTable"></tbody></table>
+      <div class="detail-row"><span>Total do pedido</span><strong id="orderTotal" class="pink">R$ 0,00</strong></div>
+    </div>
+    <div class="form-card">
+      <h3>Pagamento e entrega</h3>
+      <div class="g2"><div><label>Entrada</label><input id="deposit" type="number" value="0"></div><div><label>Forma de pagamento</label><select id="payment"><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>A combinar</option></select></div></div>
+      <div class="g2"><div><label>Horário</label><input id="deliveryTime" value="A combinar"></div><div><label>Local</label><input id="deliveryPlace" value="A definir"></div></div>
+      <label>Condição de pagamento</label><textarea id="paymentCondition">50% um mês antes do evento e o restante na semana do evento.</textarea>
+      <label>Observações</label><textarea id="notes"></textarea>
+      <div class="btn-row"><button class="btn btn-primary" onclick="saveOrder()">Finalizar pedido</button><button class="btn btn-outline" onclick="printQuote()">Gerar orçamento</button><button class="btn btn-outline" onclick="printContract()">Gerar contrato</button></div>
+    </div>
+  </div>
+</section>
+
+<section id="details" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('orders')">‹</button><h2>Detalhes do pedido</h2><button class="page-action" onclick="editCurrentOrder()">✎</button></div>
+  <div class="content"><div id="detailsContent"></div></div>
+</section>
+
+<section id="more" class="screen">
+  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Mais</h2><span></span></div>
+  <div class="content">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><img src="logo.png" class="brand-logo"><div><strong>Noeli Malta</strong><div class="small">Brigadeiros e bem casados<br>Versão 1.0.0</div></div></div>
+    <div class="more-card">
+      <div class="more-row"><span>💾</span><button onclick="exportBackup()">Backup / Restaurar</button></div>
+      <div class="more-row"><span>📤</span><button onclick="exportBackup()">Exportar dados</button></div>
+      <div class="more-row"><span>📥</span><button onclick="document.getElementById('backupFile').click()">Importar dados</button><input id="backupFile" type="file" accept=".json" style="display:none" onchange="importBackup(event)"></div>
+      <div class="more-row"><span>⚙️</span><button onclick="requestNotifications()">Configurações</button></div>
+      <div class="more-row"><span>ℹ️</span><button onclick="alert('Sistema offline para gestão de pedidos, agenda, contratos e cardápio.')">Sobre o sistema</button></div>
+    </div>
+    <div class="hero-note" style="margin-top:14px"><div>✅</div><div><strong style="color:#2b7429">Dados salvos no dispositivo</strong><div class="small">Faça backups regularmente.</div></div></div>
+  </div>
+</section>
+
+</div>
+
+<nav class="bottom-nav">
+  <button id="navHome" class="nav-btn active" onclick="openScreen('home')"><span>🏠</span>Início</button>
+  <button id="navFinance" class="nav-btn" onclick="openScreen('finance')"><span>ⓢ</span>Financeiro</button>
+  <button id="navReports" class="nav-btn" onclick="openScreen('orders')"><span>▥</span>Relatórios</button>
+  <button id="navMore" class="nav-btn" onclick="openScreen('more')"><span>•••</span>Mais</button>
+</nav>
+
+<div id="menuModal" class="modal"><div class="modal-card"><div style="display:flex;justify-content:space-between;align-items:center"><h3>Item do cardápio</h3><button class="btn btn-light" onclick="closeModal('menuModal')">Fechar</button></div><input type="hidden" id="menuIndex"><div class="g2"><div><label>Categoria</label><input id="menuCat"></div><div><label>Nome</label><input id="menuName"></div></div><div class="g2"><div><label>Forma de venda</label><select id="menuMode"><option value="unit">Unidade</option><option value="cento">Cento</option><option value="manual">Manual</option></select></div><div><label>Preço</label><input id="menuPrice" type="number" step="0.01"></div></div><label>Sabores — um por linha</label><textarea id="menuFlavors"></textarea><div class="btn-row"><button class="btn btn-primary" onclick="saveMenuItem()">Salvar</button></div></div></div>
+
+<div id="printArea"></div>
+
+<script>
+const defaultCatalog=[
+{cat:"Brigadeiros",name:"Brigadeiros recheados",mode:"cento",price:200,flavors:["Abacaxi com doce de leite","Caipirinha","Chocolate branco com maracujá","Churros","Ferrero","Ninho com Nutella","Paçoquinha com Nutella","Prestígio","Pudim","Romeu e Julieta","Sensação"]},
+{cat:"Brigadeiros",name:"Brigadeiros tradicionais",mode:"cento",price:170,flavors:["Ao leite","Abacaxi com coco","Beijinho","Café","Café com leite","Casadinho","Coco queimado","Chocolate branco","Chocolate com laranja","Creme brulee","Laranja","Limão","Maracujá","Meio amargo","Milho verde","Napolitano","Nesquik","Ninho","Paçoquinha"]},
+{cat:"Criações",name:"Minhas criações",mode:"cento",price:320,flavors:["Damasco recheado","Figo recheado","Gorgonzola com frutas vermelhas","Gorgonzola com doce de leite","Pistache","Suspiro com morango","Vinho branco com maracujá"]},
+{cat:"Bem-casados",name:"Celofane com laço",mode:"unit",price:4.5,flavors:["Doce de leite","Tradicional","Red velvet"]},
+{cat:"Bem-casados",name:"Papel italiano com laço",mode:"unit",price:4.7,flavors:["Doce de leite","Tradicional","Red velvet"]},
+{cat:"Brownies",name:"Brownie 5x5",mode:"unit",price:4.5,flavors:["Tradicional"]},
+{cat:"Brownies",name:"Brownie com doce de leite",mode:"unit",price:5.5,flavors:["Doce de leite"]},
+{cat:"Pavlovas",name:"Pavlova mini",mode:"unit",price:3,flavors:["Limão","Vinho branco com damasco e laranja","Frutas vermelhas","Frutas amarelas"]},
+{cat:"Bombons",name:"Bombons",mode:"unit",price:3.2,flavors:["Camafeu de nozes","Caribe","Caramelo","Cereja glamour","Coco com amêndoas","Figo com nozes","Nozes com chocolate","Pistache com flor de sal","Surpresa de uva"]},
+{cat:"Bombons",name:"Copinho de chocolate",mode:"unit",price:3.5,flavors:["Chocolate","Pistache","Laranja","Limão"]},
+{cat:"Suspiros",name:"Suspiros recheados",mode:"unit",price:4,flavors:["Doce de leite","Pistache","Limão","Café","Chocolate","Frutas vermelhas","Baunilha","Brigadeiro branco","Gorgonzola com amora e nozes"]},
+{cat:"Suspiros",name:"Pirulito de suspiro",mode:"unit",price:4,flavors:["Leite condensado","Baunilha","Limão","Laranja"]},
+{cat:"Suspiros",name:"Saquinho com 10 unidades",mode:"unit",price:4,flavors:["Leite condensado","Baunilha","Limão","Laranja"]},
+{cat:"Suspiros",name:"Suspiros - cento",mode:"cento",price:40,flavors:["Leite condensado","Baunilha","Limão","Laranja"]},
+{cat:"Torres",name:"Torre de suspiros",mode:"manual",price:0,flavors:["4 andares","5 andares","6 andares","7 andares","8 andares","9 andares","10 andares","11 andares","12 andares"]}
+];
+let catalog=JSON.parse(localStorage.getItem("nm_visual_catalog")||"null")||JSON.parse(JSON.stringify(defaultCatalog));
+let items=[],editingId=null,currentOrderId=null,calDate=new Date(),selectedCalendarDate=new Date().toISOString().slice(0,10);
+const R=v=>Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const D=d=>d?d.split("-").reverse().join("/"):"-";
+const orders=()=>JSON.parse(localStorage.getItem("nm_visual_orders")||"[]");
+const setOrders=a=>localStorage.setItem("nm_visual_orders",JSON.stringify(a));
+const saveCatalog=()=>localStorage.setItem("nm_visual_catalog",JSON.stringify(catalog));
+
+function openScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
+  if(id==="home")navHome.classList.add("active");
+  if(id==="finance")navFinance.classList.add("active");
+  if(id==="orders")navReports.classList.add("active");
+  if(id==="more")navMore.classList.add("active");
+  if(id==="orders")renderOrders();
+  if(id==="contracts")renderContracts();
+  if(id==="agenda")renderAgenda();
+  if(id==="clients")renderClients();
+  if(id==="menu")renderMenu();
+  if(id==="finance")renderFinance();
+  if(id==="notifications")renderNotifications();
+  refreshHome();
+  window.scrollTo(0,0);
+}
+
+function newOrder(){
+  editingId=null;items=[];
+  ["clientName","clientPhone","clientCpf","clientAddress","eventType","eventDate","deliveryDate","itemDetails","notes"].forEach(id=>document.getElementById(id).value="");
+  deposit.value=0;deliveryTime.value="A combinar";deliveryPlace.value="A definir";renderItems();openScreen("newOrder");
+}
+function loadCategories(){productCategory.innerHTML=[...new Set(catalog.map(x=>x.cat))].map(c=>`<option>${c}</option>`).join("");loadProducts()}
+function loadProducts(){const c=productCategory.value;productSelect.innerHTML=catalog.map((p,i)=>({...p,i})).filter(p=>p.cat===c).map(p=>`<option value="${p.i}">${p.name}</option>`).join("");selectProduct()}
+function selectProduct(){const p=catalog[+productSelect.value];basePrice.value=(p?.price||0).toFixed(2);calcType.value="auto";flavorList.innerHTML=(p?.flavors||[]).map(f=>`<label class="flavor"><input class="fcheck" type="checkbox" value="${f}">${f}</label>`).join("");calcPreview()}
+function calcData(){const p=catalog[+productSelect.value],q=+productQty.value||0,pr=+basePrice.value||0;let t=calcType.value;if(t==="auto")t=p.mode==="cento"?"fraction":p.mode==="manual"?"manual":"unit";let sub=0,desc="";if(t==="unit"){sub=q*pr;desc=`${q} × ${R(pr)}`}if(t==="fraction"){sub=q/100*pr;desc=`${q} unidades com base em ${R(pr)} o cento`}if(t==="closed"){sub=q*pr;desc=`${q} cento(s) × ${R(pr)}`}if(t==="manual"){sub=pr;desc="Valor manual"}return{p,q,pr,t,sub,desc}}
+function calcPreview(){const c=calcData();itemPreview.textContent=R(c.sub);calcDescription.textContent=c.desc}
+function addItem(){const c=calcData();if(!c.q){alert("Informe a quantidade.");return}if(c.t==="manual"&&c.pr<=0){alert("Informe o valor.");return}items.push({name:c.p.name,cat:c.p.cat,q:c.q,price:c.pr,type:c.t,sub:c.sub,flavors:[...document.querySelectorAll(".fcheck:checked")].map(x=>x.value),details:itemDetails.value.trim()});itemDetails.value="";renderItems()}
+function renderItems(){itemsTable.innerHTML=items.length?items.map((x,i)=>`<tr><td>${x.name}<div class="small">${x.flavors.join(", ")}</div></td><td>${x.q}</td><td>${R(x.sub)}</td><td><button class="btn btn-danger" onclick="items.splice(${i},1);renderItems()">X</button></td></tr>`).join(""):`<tr><td colspan="4">Nenhum item adicionado.</td></tr>`;orderTotal.textContent=R(items.reduce((s,x)=>s+x.sub,0))}
+function collectOrder(){return{id:editingId||Date.now(),client:clientName.value.trim(),phone:clientPhone.value.trim(),cpf:clientCpf.value.trim(),address:clientAddress.value.trim(),event:eventType.value.trim(),eventDate:eventDate.value,deliveryDate:deliveryDate.value,items:[...items],total:items.reduce((s,x)=>s+x.sub,0),deposit:+deposit.value||0,payment:payment.value,time:deliveryTime.value,place:deliveryPlace.value,condition:paymentCondition.value,notes:notes.value,status:"Pendente",created:new Date().toISOString()}}
+function saveOrder(){const p=collectOrder();if(!p.client||!p.items.length){alert("Informe o cliente e adicione itens.");return}let a=orders(),i=a.findIndex(x=>x.id===p.id);if(i>=0){p.status=a[i].status;a[i]=p}else a.unshift(p);setOrders(a);editingId=p.id;currentOrderId=p.id;refreshHome();alert("Pedido salvo no dispositivo!");showDetails(p.id)}
+function editOrder(id){const p=orders().find(x=>x.id===id);if(!p)return;editingId=p.id;clientName.value=p.client||"";clientPhone.value=p.phone||"";clientCpf.value=p.cpf||"";clientAddress.value=p.address||"";eventType.value=p.event||"";eventDate.value=p.eventDate||"";deliveryDate.value=p.deliveryDate||"";deposit.value=p.deposit||0;payment.value=p.payment||"Pix";deliveryTime.value=p.time||"";deliveryPlace.value=p.place||"";paymentCondition.value=p.condition||"";notes.value=p.notes||"";items=p.items||[];renderItems();openScreen("newOrder")}
+function editCurrentOrder(){if(currentOrderId)editOrder(currentOrderId)}
+function deleteOrder(id){if(!confirm("Excluir este pedido?"))return;setOrders(orders().filter(x=>x.id!==id));renderOrders();refreshHome()}
+function renderOrders(){const q=(orderSearch.value||"").toLowerCase();const a=orders().filter(p=>[p.client,p.event,p.status].join(" ").toLowerCase().includes(q));ordersList.innerHTML=a.length?a.map(p=>`<div class="list-card" onclick="showDetails(${p.id})"><div class="list-icon">📅</div><div class="list-body"><div class="list-title">${p.client}</div><div class="list-sub">${p.event||"Evento"} • ${D(p.deliveryDate)} • ${R(p.total)}</div></div><span class="status ${p.status==="Aprovado"?"ok":p.status==="Cancelado"?"cancel":"pending"}">${p.status}</span><div class="arrow">›</div></div>`).join(""):"Nenhum pedido encontrado."}
+function renderContracts(){contractsList.innerHTML=orders().map(p=>`<div class="list-card"><div class="list-icon">📄</div><div class="list-body"><div class="list-title">${p.client}</div><div class="list-sub">${D(p.eventDate)} • ${R(p.total)}</div></div><button class="btn btn-outline" onclick="printContract(orders().find(x=>x.id===${p.id}))">Gerar</button></div>`).join("")||"Nenhum pedido salvo."}
+function renderClients(){const map={};orders().forEach(p=>{map[p.client]=map[p.client]||{phone:p.phone,count:0,total:0};map[p.client].count++;map[p.client].total+=p.total});clientsList.innerHTML=Object.entries(map).map(([n,v])=>`<div class="list-card"><div class="list-icon">👤</div><div class="list-body"><div class="list-title">${n}</div><div class="list-sub">${v.phone||"-"} • ${v.count} pedido(s) • ${R(v.total)}</div></div></div>`).join("")||"Nenhum cliente cadastrado."}
+function showDetails(id){const p=orders().find(x=>x.id===id);if(!p)return;currentOrderId=id;const balance=Math.max(p.total-(p.deposit||0),0),days=Math.ceil((new Date(p.deliveryDate+"T12:00:00")-new Date())/86400000);detailsContent.innerHTML=`<div class="detail-box"><div style="display:flex;justify-content:space-between;gap:10px"><div><h3 style="margin:0">${p.client}</h3><div class="small">📅 ${p.event||"Evento"} &nbsp; 🕒 ${D(p.deliveryDate)} às ${p.time||"-"}</div><div style="color:var(--pink);font-size:12px;margin-top:8px">${days>=0?`Entrega em ${days} dia(s)`: "Entrega vencida"}</div></div><span class="status ${p.status==="Aprovado"?"ok":"pending"}">${p.status}</span></div></div><div class="detail-tabs"><button class="tab active">Resumo</button><button class="tab">Itens</button><button class="tab">Pagamentos</button><button class="tab">Histórico</button></div><div class="detail-box"><div class="detail-row"><span>Total do pedido</span><strong>${R(p.total)}</strong></div><div class="detail-row"><span>Entrada paga</span><strong>${R(p.deposit)}</strong></div><div class="detail-row"><span>Saldo restante</span><strong class="pink">${R(balance)}</strong></div><div class="detail-row"><span>Status</span><strong>${p.status}</strong></div><div class="detail-row"><span>Endereço</span><strong>${p.address||"-"}</strong></div><div class="detail-row"><span>Observações</span><strong>${p.notes||"-"}</strong></div></div><div class="detail-box"><table><thead><tr><th>Item</th><th>Qtd.</th><th>Total</th></tr></thead><tbody>${p.items.map(x=>`<tr><td>${x.name}<div class="small">${x.flavors.join(", ")}</div></td><td>${x.q}</td><td>${R(x.sub)}</td></tr>`).join("")}</tbody></table></div><div class="btn-row"><button class="btn btn-outline" onclick="printContract(orders().find(x=>x.id===${p.id}))">Gerar contrato</button><button class="btn btn-primary" onclick="editOrder(${p.id})">Abrir pedido</button></div>`;openScreen("details")}
+function changeStatus(id,status){let a=orders(),p=a.find(x=>x.id===id);if(p){p.status=status;setOrders(a);showDetails(id);refreshHome()}}
+function renderAgenda(){calTitle.textContent=calDate.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});const y=calDate.getFullYear(),m=calDate.getMonth(),first=new Date(y,m,1),start=new Date(y,m,1-first.getDay()),days=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];let out=days.map(d=>`<div class="weekday">${d}</div>`).join("");for(let i=0;i<42;i++){const d=new Date(start);d.setDate(start.getDate()+i);const iso=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;const dayOrders=orders().filter(p=>p.deliveryDate===iso);out+=`<div class="day ${d.getMonth()!==m?"other":""} ${dayOrders.length?"has":""} ${iso===selectedCalendarDate?"selected":""}" onclick="selectCalendarDate('${iso}')">${d.getDate()}${dayOrders.length?'<span class="dot"></span>':''}</div>`}calendar.innerHTML=out;renderSelectedDay()}
+function changeMonth(n){calDate=new Date(calDate.getFullYear(),calDate.getMonth()+n,1);renderAgenda()}
+function selectCalendarDate(iso){selectedCalendarDate=iso;renderAgenda()}
+function renderSelectedDay(){const a=orders().filter(p=>p.deliveryDate===selectedCalendarDate);selectedDayOrders.innerHTML=`<div class="date-group">${new Date(selectedCalendarDate+"T12:00:00").toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"long",year:"numeric"})}</div>${a.map(p=>`<div class="list-card" onclick="showDetails(${p.id})"><div class="list-icon">📅</div><div class="list-body"><div class="list-title">${p.client}</div><div class="list-sub">${p.event||"Evento"} • ${D(p.deliveryDate)} • ${p.time||"-"}<br>${p.items.reduce((s,x)=>s+x.q,0)} unidades • ${R(p.total)}</div></div><span class="status ${p.status==="Aprovado"?"ok":"pending"}">${p.status}</span></div>`).join("")||'<div class="small">Nenhuma entrega nesta data.</div>'}`}
+function renderMenu(){menuList.innerHTML=[...new Set(catalog.map(x=>x.cat))].map(c=>`<div class="date-group">${c}</div>${catalog.map((p,i)=>({...p,i})).filter(p=>p.cat===c).map(p=>`<div class="list-card"><div class="list-icon">🧁</div><div class="list-body"><div class="list-title">${p.name}</div><div class="list-sub">${p.mode==="cento"?R(p.price)+" o cento":p.mode==="manual"?"Valor manual":R(p.price)+" por unidade"}<br>${p.flavors.join(", ")}</div></div><button class="btn btn-outline" onclick="openMenuEditor(${p.i})">Editar</button></div>`).join("")}`).join("")}
+function openMenuEditor(i){menuIndex.value=Number.isInteger(i)?i:"";const p=Number.isInteger(i)?catalog[i]:{cat:"",name:"",mode:"unit",price:0,flavors:[]};menuCat.value=p.cat;menuName.value=p.name;menuMode.value=p.mode;menuPrice.value=p.price;menuFlavors.value=p.flavors.join("\n");openModal("menuModal")}
+function saveMenuItem(){const p={cat:menuCat.value.trim(),name:menuName.value.trim(),mode:menuMode.value,price:+menuPrice.value||0,flavors:menuFlavors.value.split(/\n|,/).map(x=>x.trim()).filter(Boolean)};if(!p.cat||!p.name){alert("Preencha categoria e nome.");return}if(menuIndex.value==="")catalog.push(p);else catalog[+menuIndex.value]=p;saveCatalog();closeModal("menuModal");renderMenu();loadCategories()}
+function resetCatalog(){if(!confirm("Restaurar cardápio original?"))return;catalog=JSON.parse(JSON.stringify(defaultCatalog));saveCatalog();renderMenu();loadCategories()}
+function renderFinance(){const a=orders(),total=a.reduce((s,p)=>s+p.total,0),paid=a.reduce((s,p)=>s+(p.deposit||0),0),receive=total-paid;financeContent.innerHTML=`<div class="detail-box"><div class="detail-row"><span>Total orçado</span><strong>${R(total)}</strong></div><div class="detail-row"><span>Entradas recebidas</span><strong>${R(paid)}</strong></div><div class="detail-row"><span>A receber</span><strong class="pink">${R(receive)}</strong></div><div class="detail-row"><span>Pedidos</span><strong>${a.length}</strong></div></div>`}
+function pendingOrders(){const today=new Date().toISOString().slice(0,10);return orders().filter(p=>p.status!=="Finalizado"&&p.status!=="Cancelado"&&p.deliveryDate&&p.deliveryDate>today)}
+function renderNotifications(){const pending=pendingOrders();notificationList.innerHTML=`<div class="date-group">Hoje • ${new Date().toLocaleDateString("pt-BR")}</div>${pending.map(p=>{const days=Math.ceil((new Date(p.deliveryDate+"T12:00:00")-new Date())/86400000);return `<div class="list-card" onclick="showDetails(${p.id})"><div class="list-icon">📅</div><div class="list-body"><div class="list-title">${p.client}</div><div class="list-sub">${p.event||"Evento"} • ${D(p.deliveryDate)}<br>Entrega em ${days} dia(s)</div></div><div class="arrow">›</div></div>`}).join("")||'<div class="small">Nenhum pedido pendente.</div>'}`;}
+function refreshHome(){const a=orders(),today=new Date().toISOString().slice(0,10),pending=pendingOrders(),todayCount=a.filter(p=>p.deliveryDate===today).length,receive=a.reduce((s,p)=>s+Math.max(p.total-(p.deposit||0),0),0);notifBadge.textContent=pending.length;notifBadge.style.display=pending.length?"flex":"none";sumPending.textContent=pending.length;sumToday.textContent=todayCount;sumReceive.textContent=R(receive);maybeNotify(pending)}
+async function requestNotifications(){if(!("Notification" in window)){alert("Este navegador não oferece notificações.");return}const p=await Notification.requestPermission();alert(p==="granted"?"Notificações ativadas.":"Permissão não concedida.")}
+function maybeNotify(pending){if(!pending.length||!("Notification" in window)||Notification.permission!=="granted")return;const today=new Date().toISOString().slice(0,10),last=localStorage.getItem("nm_last_notification");if(last===today)return;const msg=`Você tem ${pending.length} pedido(s) pendente(s) para entrega.`;navigator.serviceWorker?.ready.then(reg=>reg.showNotification("Noeli Malta Brigadeiros e bem casados",{body:msg,icon:"logo.png",badge:"logo.png",tag:"pedidos-pendentes"}));localStorage.setItem("nm_last_notification",today)}
+function exportBackup(){const data={version:1,orders:orders(),catalog,exported:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=`backup_noeli_${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url)}
+function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.orders)||!Array.isArray(d.catalog))throw new Error();setOrders(d.orders);catalog=d.catalog;saveCatalog();refreshHome();alert("Backup restaurado.")}catch(err){alert("Arquivo inválido.")}};r.readAsText(f)}
+function printQuote(p){p=p||collectOrder();printArea.innerHTML=`<h2 style="text-align:center">ORÇAMENTO<br>Noeli Malta Brigadeiros e bem casados</h2><p><strong>Cliente:</strong> ${p.client}</p><p><strong>Evento:</strong> ${p.event||"-"} • Entrega: ${D(p.deliveryDate)}</p><table class="ptable"><thead><tr><th>QTD</th><th>DESCRIÇÃO</th><th>TOTAL</th></tr></thead><tbody>${p.items.map(x=>`<tr><td>${x.q}</td><td>${x.name}${x.flavors.length?" - "+x.flavors.join(", "):""}</td><td>${R(x.sub)}</td></tr>`).join("")}</tbody></table><h3 style="text-align:right">Total: ${R(p.total)}</h3>`;window.print()}
+function printContract(p){p=p||collectOrder();printArea.innerHTML=`<h2 style="text-align:center">CONTRATO DE PRESTAÇÃO DE SERVIÇOS</h2><p><strong>CONTRATANTE:</strong> ${p.client}, residente em ${p.address||"________"}, CPF nº ${p.cpf||"________"}, telefone ${p.phone||"________"}.</p><p><strong>CONTRATADA:</strong> Noeli Malta Brigadeiros e bem casados, CPF: 820.333.746-53, representada por Noeli Teixeira Malta de Melo, Rua São Paulo, nº 828, Bairro Marília, Lagoa da Prata/MG, CEP 35590-018.</p><table class="ptable"><thead><tr><th>QTD</th><th>DESCRIÇÃO</th><th>VALOR TOTAL</th></tr></thead><tbody>${p.items.map(x=>`<tr><td>${x.q}</td><td>${x.name}${x.flavors.length?" - "+x.flavors.join(", "):""}</td><td>${R(x.sub)}</td></tr>`).join("")}</tbody></table><p><strong>VALOR TOTAL:</strong> ${R(p.total)}</p><p><strong>Data do evento:</strong> ${D(p.eventDate)}<br><strong>Horário:</strong> ${p.time}<br><strong>Local:</strong> ${p.place}<br><strong>Condição:</strong> ${p.condition}</p><p><strong>DADOS PARA PAGAMENTO:</strong><br>Banco 756 – Lagoacred<br>Agência 4113<br>Conta 105996<br>PIX: noelimaltamelo@gmail.com</p><div class="signs"><div class="sign">Noeli Teixeira Malta de Melo</div><div class="sign">${p.client}</div></div>`;window.print()}
+function openModal(id){document.getElementById(id).classList.add("open")}function closeModal(id){document.getElementById(id).classList.remove("open")}
+let deferredPrompt;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;installBox.style.display="block"});installBtn.addEventListener("click",async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBox.style.display="none"}});
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("service-worker.js"));
+loadCategories();renderItems();refreshHome();
+</script>
+</body>
+</html>
