@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-      - homologacao
-      - desenvolvimento
   workflow_dispatch:
 
 permissions:
@@ -19,6 +17,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -42,8 +41,10 @@ jobs:
           ref: desenvolvimento
           path: dist/desenvolvimento
 
-      - name: Remover metadados do Git
-        run: find dist -type d -name .git -prune -exec rm -rf {} +
+      - name: Remover metadados e arquivos internos
+        run: |
+          find dist -type d -name .git -prune -exec rm -rf {} +
+          find dist -type d -name .github -prune -exec rm -rf {} +
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
