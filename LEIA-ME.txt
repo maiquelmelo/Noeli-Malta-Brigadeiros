@@ -1,16 +1,27 @@
-NOELI MALTA BRIGADEIROS E BEM CASADOS — APP OFFLINE
+NOELI MALTA BRIGADEIROS E BEM CASADOS — VERSÃO 2.0
 
-1. Publique todos os arquivos desta pasta no GitHub Pages.
-2. Abra o endereço no Chrome do celular/tablet.
-3. Toque em “Instalar” ou em “Adicionar à tela inicial”.
-4. Os dados serão salvos no próprio aparelho.
-5. Use a opção Mais > Backup / Restaurar para exportar os dados.
+ESTRUTURA
+- index.html: tela principal
+- assets/logo.png: logo oficial do sistema
+- assets/favicon.png: ícone do navegador
+- assets/splash.png: imagem de abertura
+- assets/produtos/: futuras fotos do cardápio
+- css/style.css: visual do aplicativo
+- js/app.js: funcionamento do aplicativo
+- manifest.json: instalação no celular/tablet
+- service-worker.js: funcionamento offline
 
-NOTIFICAÇÕES
-A versão offline exibe lembretes quando o aplicativo é aberto ou permanece ativo.
-Android e navegadores podem suspender aplicativos fechados; por isso não há garantia de
-notificação diária com o app totalmente encerrado sem usar um serviço de nuvem/push.
+COMO PUBLICAR NO GITHUB PAGES
+1. Exclua ou substitua os arquivos antigos do repositório.
+2. Envie TODO o conteúdo desta pasta, mantendo as pastas assets, css e js.
+3. Aguarde o GitHub Pages atualizar.
+4. No celular, remova a versão antiga instalada.
+5. Limpe os dados/cache do site no Chrome.
+6. Abra novamente o endereço e instale o aplicativo.
 
+COMO TROCAR A LOGO NO FUTURO
+Substitua apenas o arquivo assets/logo.png, mantendo exatamente o mesmo nome.
+Para o ícone mudar imediatamente, substitua também assets/favicon.png e assets/splash.png e altere a versão do CACHE no service-worker.js.
 
-ATUALIZAÇÃO 1.1
-Se uma versão anterior já estiver instalada, remova o aplicativo antigo ou limpe os dados do site antes de instalar esta versão.
+DADOS
+Os pedidos ficam salvos no próprio aparelho. Faça backups regularmente pelo menu Mais.
