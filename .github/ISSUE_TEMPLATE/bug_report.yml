@@ -1,0 +1,44 @@
+name: Relatar erro
+description: Informe um problema encontrado no sistema
+title: "[ERRO] "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o erro com detalhes.
+      placeholder: Ao clicar em..., o sistema...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos para reproduzir
+      placeholder: |
+        1. Abrir...
+        2. Clicar em...
+        3. Informar...
+    validations:
+      required: true
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Ambiente
+      options:
+        - Produção
+        - Homologação
+        - Desenvolvimento
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Dispositivo e navegador
+      placeholder: Galaxy A54 / Chrome
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidências
+      description: Adicione prints ou vídeos, quando possível.
