@@ -1,10 +1,16 @@
-const CACHE = "noeli-malta-v2-0-0";
+const CACHE = "noeli-malta-v2-1-0-dev";
 const FILES = [
   "./",
   "./index.html",
   "./manifest.json",
   "./css/style.css",
+  "./css/dev-features.css",
   "./js/app.js",
+  "./js/dev-features.js",
+  "./js/dev-ui.js",
+  "./js/dev-orders.js",
+  "./js/dev-production.js",
+  "./js/dev-notifications.js",
   "./assets/logo.png",
   "./assets/favicon.png",
   "./assets/splash.png"
