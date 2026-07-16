@@ -1,4 +1,4 @@
-const CACHE = "noeli-malta-v3-0-base-dev";
+const CACHE = "noeli-malta-v3-0-delete-dev";
 const FILES = [
   "./","./index.html","./manifest.json","./css/style.css","./css/dev-features.css","./css/v3-base.css","./js/app.js","./js/dev-features.js","./js/dev-ui.js","./js/dev-orders.js","./js/dev-production.js","./js/dev-notifications.js","./js/dev-workflow.js","./js/v3-base.js","./assets/logo.png","./assets/favicon.png","./assets/splash.png"
 ];
