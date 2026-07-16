@@ -1,5 +1,5 @@
 (()=>{
-  const VERSION='3.0-admin-finance-fix-2';
+  const VERSION='3.0-admin-finance-fix-3';
   const files=[
     'js/dev-ui.js',
     'js/dev-orders.js',
@@ -8,7 +8,8 @@
     'js/dev-workflow.js',
     'js/v3-base.js',
     'js/v3-delete-fix.js',
-    'js/v3-admin-finance.js'
+    'js/v3-admin-finance.js',
+    'js/v3-admin-visible-fix.js'
   ];
   let chain=Promise.resolve();
   files.forEach(src=>{
