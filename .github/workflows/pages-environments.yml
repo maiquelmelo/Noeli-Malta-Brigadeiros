@@ -55,7 +55,7 @@ jobs:
           find dist -type f \( -name '*.nmbackup' -o -name 'backup*.json' -o -name '.env*' \) -delete
 
       - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Preparar artefato
         uses: actions/upload-pages-artifact@v3
