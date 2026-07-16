@@ -25,7 +25,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Obter versão de produção
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: main
           path: dist
@@ -33,7 +33,7 @@ jobs:
           persist-credentials: false
 
       - name: Obter versão de homologação
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: homologacao
           path: dist/homologacao
@@ -41,7 +41,7 @@ jobs:
           persist-credentials: false
 
       - name: Obter versão de desenvolvimento
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: desenvolvimento
           path: dist/desenvolvimento
