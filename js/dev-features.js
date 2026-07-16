@@ -1,5 +1,9 @@
 (()=>{
-  const VERSION='3.0-admin-finance-fix-3';
+  const VERSION='3.1-production-intelligent-1';
+  const style=document.createElement('link');
+  style.rel='stylesheet';
+  style.href=`css/v3-1-production.css?v=${VERSION}`;
+  document.head.appendChild(style);
   const files=[
     'js/dev-ui.js',
     'js/dev-orders.js',
@@ -9,7 +13,8 @@
     'js/v3-base.js',
     'js/v3-delete-fix.js',
     'js/v3-admin-finance.js',
-    'js/v3-admin-visible-fix.js'
+    'js/v3-admin-visible-fix.js',
+    'js/v3-1-production.js'
   ];
   let chain=Promise.resolve();
   files.forEach(src=>{
