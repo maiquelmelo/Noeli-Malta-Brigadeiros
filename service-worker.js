@@ -1,4 +1,4 @@
-const CACHE = "noeli-malta-v2-1-0-dev";
+const CACHE = "noeli-malta-v3-0-workflow-dev";
 const FILES = [
   "./",
   "./index.html",
@@ -11,6 +11,7 @@ const FILES = [
   "./js/dev-orders.js",
   "./js/dev-production.js",
   "./js/dev-notifications.js",
+  "./js/dev-workflow.js",
   "./assets/logo.png",
   "./assets/favicon.png",
   "./assets/splash.png"
