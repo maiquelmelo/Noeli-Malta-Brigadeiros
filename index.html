@@ -10,6 +10,7 @@
 <title>Noeli Malta Brigadeiros e bem casados</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/dev-features.css">
+<link rel="stylesheet" href="css/v3-base.css">
 </head>
 <body>
 <div class="app-shell">
@@ -24,18 +25,12 @@
   <header class="top-header">
     <div class="brand-row">
       <img src="assets/logo.png" class="brand-logo" alt="Logo Noeli Malta">
-      <div class="brand-text">
-        <div class="brand-title">Noeli Malta</div>
-        <div class="brand-sub">Brigadeiros e bem casados</div>
-      </div>
+      <div class="brand-text"><div class="brand-title">Noeli Malta</div><div class="brand-sub">Brigadeiros e bem casados</div></div>
       <button class="icon-btn" onclick="openScreen('notifications')">🔔<span id="notifBadge" class="badge-count">0</span></button>
     </div>
   </header>
   <div class="content">
-    <div class="hero-note">
-      <div class="bell">🔔</div>
-      <div><strong>Notificações diárias</strong><div style="font-size:12px;color:#655e64;margin-top:4px">Pedidos pendentes serão lembrados todos os dias até a véspera da entrega.</div></div>
-    </div>
+    <div class="hero-note"><div class="bell">🔔</div><div><strong>Notificações diárias</strong><div style="font-size:12px;color:#655e64;margin-top:4px">Pedidos pendentes serão lembrados todos os dias até a véspera da entrega.</div></div></div>
     <div class="tile-grid">
       <button class="tile pink" onclick="newOrder()"><div class="tile-icon">➕</div><div class="tile-title">Novo Pedido</div><div class="tile-sub">Criar novo pedido</div></button>
       <button class="tile orange" onclick="openScreen('orders')"><div class="tile-icon">📋</div><div class="tile-title">Pedidos</div><div class="tile-sub">Ver todos os pedidos</div></button>
@@ -53,118 +48,21 @@
   </div>
 </section>
 
-<section id="notifications" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Notificações</h2><button class="page-action" onclick="requestNotifications()">⚙</button></div>
-  <div class="content">
-    <div class="notification-card"><div style="font-size:28px">🔔</div><div><strong style="color:var(--pink-dark)">Pedidos pendentes</strong><div style="font-size:12px;margin-top:5px">As notificações serão exibidas diariamente até o dia anterior da entrega, enquanto o aplicativo estiver instalado e for aberto regularmente.</div></div></div>
-    <div id="notificationList"></div>
-  </div>
-</section>
-
-<section id="orders" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Pedidos</h2><button class="page-action" onclick="newOrder()">＋</button></div>
-  <div class="content"><input id="orderSearch" placeholder="Pesquisar pedido..." oninput="renderOrders()"><div id="ordersList" style="margin-top:12px"></div></div>
-</section>
-
-<section id="contracts" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Contratos</h2><span></span></div>
-  <div class="content"><div id="contractsList"></div></div>
-</section>
-
-<section id="agenda" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Agenda</h2><span></span></div>
-  <div class="content">
-    <div class="calendar-card">
-      <div class="cal-head"><button class="cal-btn" onclick="changeMonth(-1)">‹</button><div id="calTitle" class="cal-title"></div><button class="cal-btn" onclick="changeMonth(1)">›</button></div>
-      <div id="calendar" class="cal-grid"></div>
-    </div>
-    <div id="selectedDayOrders" style="margin-top:14px"></div>
-  </div>
-</section>
-
-<section id="clients" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Clientes</h2><span></span></div>
-  <div class="content"><div id="clientsList"></div></div>
-</section>
-
-<section id="menu" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Cardápio</h2><button class="page-action" onclick="openMenuEditor()">＋</button></div>
-  <div class="content"><div class="btn-row"><button class="btn btn-light" onclick="resetCatalog()">Restaurar cardápio</button></div><div id="menuList"></div></div>
-</section>
-
-<section id="finance" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Financeiro</h2><span></span></div>
-  <div class="content"><div id="financeContent"></div></div>
-</section>
-
-<section id="newOrder" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Novo pedido</h2><span></span></div>
-  <div class="content">
-    <div class="form-card">
-      <h3>Cliente</h3>
-      <div class="g2"><div><label>Nome</label><input id="clientName"></div><div><label>WhatsApp</label><input id="clientPhone"></div></div>
-      <div class="g2"><div><label>CPF</label><input id="clientCpf"></div><div><label>Endereço</label><input id="clientAddress"></div></div>
-      <div class="g3"><div><label>Evento</label><input id="eventType"></div><div><label>Data do evento</label><input id="eventDate" type="date"></div><div><label>Data da entrega</label><input id="deliveryDate" type="date"></div></div>
-    </div>
-    <div class="form-card">
-      <h3>Produtos</h3>
-      <div class="g2"><div><label>Categoria</label><select id="productCategory" onchange="loadProducts()"></select></div><div><label>Produto</label><select id="productSelect" onchange="selectProduct()"></select></div></div>
-      <label>Sabores</label><div id="flavorList" class="flavors"></div>
-      <div class="g3"><div><label>Quantidade</label><input id="productQty" type="number" value="100" min="1" oninput="calcPreview()"></div><div><label>Cálculo</label><select id="calcType" onchange="calcPreview()"><option value="auto">Automático</option><option value="unit">Por unidade</option><option value="fraction">Preço do cento</option><option value="closed">Cento fechado</option><option value="manual">Manual</option></select></div><div><label>Preço base</label><input id="basePrice" type="number" step="0.01" oninput="calcPreview()"></div></div>
-      <label>Detalhes</label><textarea id="itemDetails"></textarea>
-      <div class="detail-box"><div class="detail-row"><span>Subtotal</span><strong id="itemPreview" class="pink">R$ 0,00</strong></div><div id="calcDescription" style="font-size:11px;color:var(--muted)"></div></div>
-      <div class="btn-row"><button class="btn btn-primary" onclick="addItem()">Adicionar item</button></div>
-    </div>
-    <div class="form-card">
-      <h3>Resumo do pedido</h3>
-      <table><thead><tr><th>Item</th><th>Qtd.</th><th>Total</th><th></th></tr></thead><tbody id="itemsTable"></tbody></table>
-      <div class="detail-row"><span>Total do pedido</span><strong id="orderTotal" class="pink">R$ 0,00</strong></div>
-    </div>
-    <div class="form-card">
-      <h3>Pagamento e entrega</h3>
-      <div class="g2"><div><label>Entrada</label><input id="deposit" type="number" value="0"></div><div><label>Forma de pagamento</label><select id="payment"><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>A combinar</option></select></div></div>
-      <div class="g2"><div><label>Horário</label><input id="deliveryTime" value="A combinar"></div><div><label>Local</label><input id="deliveryPlace" value="A definir"></div></div>
-      <label>Condição de pagamento</label><textarea id="paymentCondition">50% um mês antes do evento e o restante na semana do evento.</textarea>
-      <label>Observações</label><textarea id="notes"></textarea>
-      <div class="btn-row"><button class="btn btn-primary" onclick="saveOrder()">Finalizar pedido</button><button class="btn btn-outline" onclick="printQuote()">Gerar orçamento</button><button class="btn btn-outline" onclick="printContract()">Gerar contrato</button></div>
-    </div>
-  </div>
-</section>
-
-<section id="details" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('orders')">‹</button><h2>Detalhes do pedido</h2><button class="page-action" onclick="editCurrentOrder()">✎</button></div>
-  <div class="content"><div id="detailsContent"></div></div>
-</section>
-
-<section id="more" class="screen">
-  <div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Mais</h2><span></span></div>
-  <div class="content">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><img src="assets/logo.png" class="brand-logo"><div><strong>Noeli Malta</strong><div class="small">Brigadeiros e bem casados<br>Versão 2.0.0</div></div></div>
-    <div class="more-card">
-      <div class="more-row"><span>💾</span><button onclick="exportBackup()">Backup / Restaurar</button></div>
-      <div class="more-row"><span>📤</span><button onclick="exportBackup()">Exportar dados</button></div>
-      <div class="more-row"><span>📥</span><button onclick="document.getElementById('backupFile').click()">Importar dados</button><input id="backupFile" type="file" accept=".json" style="display:none" onchange="importBackup(event)"></div>
-      <div class="more-row"><span>⚙️</span><button onclick="requestNotifications()">Configurações</button></div>
-      <div class="more-row"><span>ℹ️</span><button onclick="alert('Sistema offline para gestão de pedidos, agenda, contratos e cardápio.')">Sobre o sistema</button></div>
-    </div>
-    <div class="hero-note" style="margin-top:14px"><div>✅</div><div><strong style="color:#2b7429">Dados salvos no dispositivo</strong><div class="small">Faça backups regularmente.</div></div></div>
-  </div>
-</section>
-
+<section id="notifications" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Notificações</h2><button class="page-action" onclick="requestNotifications()">⚙</button></div><div class="content"><div class="notification-card"><div style="font-size:28px">🔔</div><div><strong style="color:var(--pink-dark)">Pedidos pendentes</strong><div style="font-size:12px;margin-top:5px">As notificações serão exibidas diariamente até o dia anterior da entrega.</div></div></div><div id="notificationList"></div></div></section>
+<section id="orders" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Pedidos</h2><button class="page-action" onclick="newOrder()">＋</button></div><div class="content"><input id="orderSearch" placeholder="Pesquisar pedido..." oninput="renderOrders()"><div id="ordersList" style="margin-top:12px"></div></div></section>
+<section id="contracts" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Contratos</h2><span></span></div><div class="content"><div id="contractsList"></div></div></section>
+<section id="agenda" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Agenda</h2><span></span></div><div class="content"><div class="calendar-card"><div class="cal-head"><button class="cal-btn" onclick="changeMonth(-1)">‹</button><div id="calTitle" class="cal-title"></div><button class="cal-btn" onclick="changeMonth(1)">›</button></div><div id="calendar" class="cal-grid"></div></div><div id="selectedDayOrders" style="margin-top:14px"></div></div></section>
+<section id="clients" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Clientes</h2><span></span></div><div class="content"><div id="clientsList"></div></div></section>
+<section id="menu" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Cardápio</h2><button class="page-action" onclick="openMenuEditor()">＋</button></div><div class="content"><div class="btn-row"><button class="btn btn-light" onclick="resetCatalog()">Restaurar cardápio</button></div><div id="menuList"></div></div></section>
+<section id="finance" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Financeiro</h2><span></span></div><div class="content"><div id="financeContent"></div></div></section>
+<section id="newOrder" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Novo pedido</h2><span></span></div><div class="content"><div class="form-card"><h3>Cliente</h3><div class="g2"><div><label>Nome</label><input id="clientName"></div><div><label>WhatsApp</label><input id="clientPhone"></div></div><div class="g2"><div><label>CPF</label><input id="clientCpf"></div><div><label>Endereço</label><input id="clientAddress"></div></div><div class="g3"><div><label>Evento</label><input id="eventType"></div><div><label>Data do evento</label><input id="eventDate" type="date"></div><div><label>Data da entrega</label><input id="deliveryDate" type="date"></div></div></div><div class="form-card"><h3>Produtos</h3><div class="g2"><div><label>Categoria</label><select id="productCategory" onchange="loadProducts()"></select></div><div><label>Produto</label><select id="productSelect" onchange="selectProduct()"></select></div></div><label>Sabores</label><div id="flavorList" class="flavors"></div><div class="g3"><div><label>Quantidade</label><input id="productQty" type="number" value="100" min="1" oninput="calcPreview()"></div><div><label>Cálculo</label><select id="calcType" onchange="calcPreview()"><option value="auto">Automático</option><option value="unit">Por unidade</option><option value="fraction">Preço do cento</option><option value="closed">Cento fechado</option><option value="manual">Manual</option></select></div><div><label>Preço base</label><input id="basePrice" type="number" step="0.01" oninput="calcPreview()"></div></div><label>Detalhes</label><textarea id="itemDetails"></textarea><div class="detail-box"><div class="detail-row"><span>Subtotal</span><strong id="itemPreview" class="pink">R$ 0,00</strong></div><div id="calcDescription" style="font-size:11px;color:var(--muted)"></div></div><div class="btn-row"><button class="btn btn-primary" onclick="addItem()">Adicionar item</button></div></div><div class="form-card"><h3>Resumo do pedido</h3><table><thead><tr><th>Item</th><th>Qtd.</th><th>Total</th><th></th></tr></thead><tbody id="itemsTable"></tbody></table><div class="detail-row"><span>Total do pedido</span><strong id="orderTotal" class="pink">R$ 0,00</strong></div></div><div class="form-card"><h3>Pagamento e entrega</h3><div class="g2"><div><label>Entrada</label><input id="deposit" type="number" value="0"></div><div><label>Forma de pagamento</label><select id="payment"><option>Pix</option><option>Dinheiro</option><option>Cartão</option><option>A combinar</option></select></div></div><div class="g2"><div><label>Horário</label><input id="deliveryTime" value="A combinar"></div><div><label>Local</label><input id="deliveryPlace" value="A definir"></div></div><label>Condição de pagamento</label><textarea id="paymentCondition">50% um mês antes do evento e o restante na semana do evento.</textarea><label>Observações</label><textarea id="notes"></textarea><div class="btn-row"><button class="btn btn-primary" onclick="saveOrder()">Finalizar pedido</button><button class="btn btn-outline" onclick="printQuote()">Gerar orçamento</button><button class="btn btn-outline" onclick="printContract()">Gerar contrato</button></div></div></div></section>
+<section id="details" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('orders')">‹</button><h2>Detalhes do pedido</h2><button class="page-action" onclick="editCurrentOrder()">✎</button></div><div class="content"><div id="detailsContent"></div></div></section>
+<section id="more" class="screen"><div class="page-header"><button class="back-btn" onclick="openScreen('home')">‹</button><h2>Mais</h2><span></span></div><div class="content"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><img src="assets/logo.png" class="brand-logo"><div><strong>Noeli Malta</strong><div class="small">Brigadeiros e bem casados<br>Versão 3.0 — Desenvolvimento</div></div></div><div class="more-card"><div class="more-row"><span>💾</span><button onclick="exportBackup()">Backup / Restaurar</button></div><div class="more-row"><span>📤</span><button onclick="exportBackup()">Exportar dados</button></div><div class="more-row"><span>📥</span><button onclick="document.getElementById('backupFile').click()">Importar dados</button><input id="backupFile" type="file" accept=".json" style="display:none" onchange="importBackup(event)"></div><div class="more-row"><span>⚙️</span><button onclick="requestNotifications()">Configurações</button></div></div></div></section>
 </div>
-
-<nav class="bottom-nav">
-  <button id="navHome" class="nav-btn active" onclick="openScreen('home')"><span>🏠</span>Início</button>
-  <button id="navFinance" class="nav-btn" onclick="openScreen('finance')"><span>ⓢ</span>Financeiro</button>
-  <button id="navReports" class="nav-btn" onclick="openScreen('orders')"><span>▥</span>Relatórios</button>
-  <button id="navMore" class="nav-btn" onclick="openScreen('more')"><span>•••</span>Mais</button>
-</nav>
-
+<nav class="bottom-nav"><button id="navHome" class="nav-btn active" onclick="openScreen('home')"><span>🏠</span>Início</button><button id="navFinance" class="nav-btn" onclick="openScreen('finance')"><span>ⓢ</span>Financeiro</button><button id="navReports" class="nav-btn" onclick="openScreen('orders')"><span>▥</span>Relatórios</button><button id="navMore" class="nav-btn" onclick="openScreen('more')"><span>•••</span>Mais</button></nav>
 <div id="menuModal" class="modal"><div class="modal-card"><div style="display:flex;justify-content:space-between;align-items:center"><h3>Item do cardápio</h3><button class="btn btn-light" onclick="closeModal('menuModal')">Fechar</button></div><input type="hidden" id="menuIndex"><div class="g2"><div><label>Categoria</label><input id="menuCat"></div><div><label>Nome</label><input id="menuName"></div></div><div class="g2"><div><label>Forma de venda</label><select id="menuMode"><option value="unit">Unidade</option><option value="cento">Cento</option><option value="manual">Manual</option></select></div><div><label>Preço</label><input id="menuPrice" type="number" step="0.01"></div></div><label>Sabores — um por linha</label><textarea id="menuFlavors"></textarea><div class="btn-row"><button class="btn btn-primary" onclick="saveMenuItem()">Salvar</button></div></div></div>
-
 <div id="printArea"></div>
-
-<script src="js/app.js" defer></script>
-<script src="js/dev-features.js" defer></script>
+<script src="js/app.js"></script>
+<script src="js/dev-features.js"></script>
 </body>
 </html>
