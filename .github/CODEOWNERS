@@ -1,0 +1,8 @@
+# Responsável padrão por todas as alterações
+* @maiquelmelo
+
+# Áreas sensíveis
+/.github/workflows/ @maiquelmelo
+/service-worker.js @maiquelmelo
+/manifest.json @maiquelmelo
+/js/ @maiquelmelo
