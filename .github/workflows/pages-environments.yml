@@ -19,6 +19,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -28,23 +29,30 @@ jobs:
         with:
           ref: main
           path: dist
+          fetch-depth: 1
+          persist-credentials: false
 
       - name: Obter versão de homologação
         uses: actions/checkout@v4
         with:
           ref: homologacao
           path: dist/homologacao
+          fetch-depth: 1
+          persist-credentials: false
 
       - name: Obter versão de desenvolvimento
         uses: actions/checkout@v4
         with:
           ref: desenvolvimento
           path: dist/desenvolvimento
+          fetch-depth: 1
+          persist-credentials: false
 
       - name: Remover metadados e arquivos internos
         run: |
           find dist -type d -name .git -prune -exec rm -rf {} +
           find dist -type d -name .github -prune -exec rm -rf {} +
+          find dist -type f \( -name '*.nmbackup' -o -name 'backup*.json' -o -name '.env*' \) -delete
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
