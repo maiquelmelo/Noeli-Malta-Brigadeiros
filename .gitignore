@@ -1,0 +1,23 @@
+# Arquivos locais e segredos
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Backups e exportações do sistema
+*.nmbackup
+backup*.json
+backups/
+exports/
+
+# Dados reais e anexos locais
+data/
+private/
+attachments/
+comprovantes/
+
+# Arquivos temporários do sistema operacional
+.DS_Store
+Thumbs.db
